@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="AI Compute Advisor v2 — model and hardware capacity planning"
+    />
+    <title>AI Compute Advisor v2</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#af-content">Skip to content / 跳到内容</a>
+    <div id="advisor-full" aria-label="AI Compute Advisor v2">
+      <header class="af-top">
+        <div class="af-brand">AI Compute Advisor</div>
+        <div class="af-lang" aria-label="Language">
+          <button
+            type="button"
+            data-lang="zh"
+            class="cursor-interaction"
+            aria-pressed="true"
+          >
+            中文</button
+          ><button
+            type="button"
+            data-lang="en"
+            class="cursor-interaction"
+            aria-pressed="false"
+          >
+            EN
+          </button>
+        </div>
+      </header>
+      <div class="af-shell">
+        <aside id="af-nav" aria-label="Navigation"></aside>
+        <main id="af-content" class="af-content" tabindex="-1"></main>
+      </div>
+      <footer class="af-foot">
+        <span id="af-footer-left"></span><span id="af-footer-right"></span>
+      </footer>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

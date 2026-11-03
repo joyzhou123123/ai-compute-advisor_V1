@@ -1,0 +1,53 @@
+# UI v2 (0.2.0)
+
+本版本仅更新展示层，基于已经确认的“结果优先 / 精简字段”界面。
+
+- 默认进入硬件找模型：容量候选、条件不满足分组；按显存需求或参数规模排序。
+- 两个选型流程均每页展示 5 条结果；模型库、设备库每页展示 8 条。
+- 需求编辑、结果、详情和对比分开显示。翻页和切换语言保留选择。
+- 硬件流程保留 8 个有效输入；模型流程保留 5 个。没有数据的详情字段不渲染。
+- 中文 / EN 位于全局顶部；语言写入原有 `lang` URL 参数。
+- 外层页面跟随内容高度，避免 iframe 内外出现两层纵向滚动。
+
+## 数据保持原样
+
+基线：`7f68e2e137b4af6fe34db91b6d080e2c64b95244`。
+
+Fork 中的在线计算器实际包含 **22 条模型、9 条设备、10 条部署方案**。
+此前设计示意里的 26 条设备来自另一版本，没有混入此 Fork。
+MiniMax 的 `Number.NaN` 和原数据中的 `null` 均保留原值；不在 UI 中伪装成 0。
+22 条模型都保留在目录，21 条有 KV 数据的记录可用于容量估算。
+跨设备方案仍在原始部署目录中，并可在模型找硬件的容量结果中查看。
+
+以下文件没有改写：
+
+- `public/live-deployment-calculator.html`：完整原始页面，旧地址仍可访问。
+- `public/data/*.json`：另一套完整 Data Pack 数据，未删记录、字段或改值。
+- `src/calculator/**`：原有计算模块及其测试。
+- 原有 schemas、validators、state、FX、Data Pack 导入导出接口。
+
+`scripts/extract-live-source.mjs` 从原页面的 AST 提取 M/H/P 数据字面量、原有辅助函数及显存计算语句，生成 `public/ui-v2/source.js`。
+不通过 JSON 序列化复制原数组，避免 `NaN` 被变成 `null`；公式块原样复制。
+新增的上下文上限和量化格式检查用于结果展示分组，不修改原显存算式。
+Fork 没有模型绑定的实测速度记录，因此新版只展示原目录已有的方向性速度，不引入示意中另一版本的测速值。
+
+## 运行与核验
+
+```sh
+npm ci
+npm run verify:data
+npm run lint
+npm test
+npm run build
+npm run preview
+```
+
+`verify:data` 校验 SHA-256 基线，覆盖原页面、所有 bundled JSON 和原计算模块。
+`verify:source` 校验新版引用的数据字面量和公式块是否与原页面一致。
+确需在后续版本更新数据时，应先更新原权威数据，再运行 `npm run generate:source`，并依照 AGENTS.md 更新数据元信息、校验与基线；不要直接编辑生成文件。
+
+新版入口为 `/`，也可以直接访问 `/ui-v2/index.html?lang=zh` 或 `?lang=en`。
+原版入口为 `/live-deployment-calculator.html?lang=zh`。
+保持相对路径，支持 GitHub Pages 仓库子路径部署；没有新后端或外部 API 依赖。
+
+根入口原本就是独立静态计算器，没有 Full Data Pack 导入按钮；此版本保留这个入口边界，不将未接入的管理操作添加到 UI。
