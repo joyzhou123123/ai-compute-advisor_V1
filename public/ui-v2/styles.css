@@ -1,14 +1,14 @@
 #advisor-full {
-  --af-bg: light-dark(#f4f6fa, #101622);
-  --af-panel: light-dark(#fff, #192131);
-  --af-sub: light-dark(#edf0f6, #121a29);
-  --af-line: light-dark(#dce1ec, #344058);
-  --af-text: light-dark(#20293c, #edf1fa);
-  --af-muted: light-dark(#56647b, #aab8ce);
-  --af-accent: light-dark(#5849b8, #b5a7ff);
-  --af-tint: light-dark(#efecfc, #2d2947);
-  --af-good: light-dark(#17654c, #89d6b6);
-  --af-warn: light-dark(#865505, #edc785);
+  --af-bg: #f4f6fa;
+  --af-panel: #fff;
+  --af-sub: #edf0f6;
+  --af-line: #dce1ec;
+  --af-text: #20293c;
+  --af-muted: #56647b;
+  --af-accent: #5849b8;
+  --af-tint: #efecfc;
+  --af-good: #17654c;
+  --af-warn: #865505;
   --af-pad: 12px;
   color: var(--af-text);
   background: var(--af-bg);
@@ -631,7 +631,7 @@
 }
 #advisor-full .af-primary {
   background: var(--af-accent);
-  color: light-dark(#fff, #151128);
+  color: #fff;
   border-color: var(--af-accent);
 }
 #advisor-full .af-configtop,
@@ -692,8 +692,9 @@
 }
 
 html {
-  color-scheme: light dark;
-  background: light-dark(#f4f6fa, #101622);
+  /* UI v2 uses the approved light palette regardless of the OS theme. */
+  color-scheme: only light;
+  background: #f4f6fa;
 }
 body {
   margin: 0;
@@ -742,8 +743,8 @@ button:disabled {
   transform: translateY(-200%);
   padding: 10px;
   z-index: 5;
-  background: light-dark(#fff, #192131);
-  color: light-dark(#5849b8, #b5a7ff);
+  background: #fff;
+  color: #5849b8;
 }
 .skip-link:focus {
   transform: none;
